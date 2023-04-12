@@ -1,0 +1,14 @@
+name: ST-BoilerPlate # TODO: 수정
+main: net.starly.boilerplate.BoilerPlateMain # TODO: 수정
+author: Starly Team
+website: http://starly.kr/
+
+description: BoilerPlate Plugin. # TODO: 수정
+
+softdepend:
+  - ST-Core
+
+version: 1.0
+api-version: 1.13
+
+commands:

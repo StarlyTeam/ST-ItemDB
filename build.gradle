@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'net.starly.boilerplate' // TODO: 수정
+version '1.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = "http://starly.kr:8083/repository/maven-public/"
+        allowInsecureProtocol = true
+    }
+}
+
+dependencies {
+    //JAVA DEPENDENCIES
+    compileOnly "org.jetbrains:annotations:23.0.0"
+    compileOnly "org.projectlombok:lombok:1.18.24"
+    annotationProcessor "org.projectlombok:lombok:1.18.24"
+
+    //BUKKIT DEPENDENCIES
+    compileOnly "org.spigotmc:spigot-api:R0.1:1.12.2"
+
+    // OTHER DEPENDENCIES
+    compileOnly "net.starly.core:ST-Core:1.7"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
