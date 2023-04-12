@@ -2,6 +2,7 @@ package net.starly.itemdb.command;
 
 import net.starly.itemdb.ItemDBMain;
 import net.starly.itemdb.itemdb.impl.ItemDBImpl;
+import net.starly.itemdb.util.ItemDBUtil;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -35,6 +36,8 @@ public class ItemDBCmd implements CommandExecutor {
                 player.sendMessage("당신은 해당 명령어를 사용할 권한이 없습니다");
                 return false;
             }
+
+            ItemDBUtil.openItemDBGui(player);
             return false;
         }
 
@@ -46,7 +49,7 @@ public class ItemDBCmd implements CommandExecutor {
                 String id = args[1];
 
                 subCommandMap.get(args[0]).accept(itemDB, player, id);
-                player.sendMessage(args[1]);
+                player.sendMessage(args[0]);
                 break;
             }
 

@@ -12,6 +12,9 @@ version: 1.0
 api-version: 1.13
 
 permissions:
+  starly.itemdb.open:
+    description: 아이템 DB GUI를 열 수 있는 권한
+    default: op
   starly.itemdb.save:
     description: 아이템 DB에 아이템을 저장하는 권한
     default: op
