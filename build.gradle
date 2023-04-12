@@ -2,15 +2,12 @@ plugins {
     id 'java'
 }
 
-group 'net.starly.boilerplate' // TODO: 수정
+group 'net.starly.itemdb'
 version '1.0'
 
 repositories {
     mavenCentral()
-    maven {
-        url = "http://starly.kr:8083/repository/maven-public/"
-        allowInsecureProtocol = true
-    }
+    maven { url = "http://starly.kr:8083/repository/maven-public/"; allowInsecureProtocol = true }
 }
 
 dependencies {

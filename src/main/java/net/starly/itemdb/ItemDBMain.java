@@ -1,10 +1,19 @@
-package net.starly.boilerplate;
+package net.starly.itemdb;
 
+import lombok.Getter;
 import net.starly.core.bstats.Metrics;
+import net.starly.itemdb.command.ItemDBCmd;
+import net.starly.itemdb.command.tabcomplete.ItemDBTab;
+import net.starly.itemdb.itemdb.impl.ItemDBImpl;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class BoilerPlateMain extends JavaPlugin {
-    private static BoilerPlateMain instance;
+public class ItemDBMain extends JavaPlugin {
+
+    @Getter private static ItemDBMain instance;
+    @Getter private static ItemDBImpl itemDB;
+
+    @Override
+    public void onLoad() { instance = this; }
 
     @Override
     public void onEnable() {
@@ -19,25 +28,23 @@ public class BoilerPlateMain extends JavaPlugin {
 
         /* SETUP
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        instance = this;
         new Metrics(this, 12345); // TODO: 수정
+        itemDB = new ItemDBImpl(this);
 
         /* CONFIG
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        // TODO: 수정
+        saveDefaultConfig();
 
         /* COMMAND
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        // TODO: 수정
+        getCommand("itemdb").setExecutor(new ItemDBCmd());
+        getCommand("itemdb").setTabCompleter(new ItemDBTab());
 
         /* EVENT
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         // TODO: 수정
     }
 
-    public static BoilerPlateMain getInstance() {
-        return instance;
-    }
 
     private boolean isPluginEnabled(String path) {
         try {

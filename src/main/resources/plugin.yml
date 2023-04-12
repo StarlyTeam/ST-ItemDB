@@ -1,9 +1,9 @@
-name: ST-BoilerPlate # TODO: 수정
-main: net.starly.boilerplate.BoilerPlateMain # TODO: 수정
+name: ST-ItemDB
+main: net.starly.itemdb.ItemDBMain
 author: Starly Team
 website: http://starly.kr/
 
-description: BoilerPlate Plugin. # TODO: 수정
+description: ItemDB Plugin.
 
 softdepend:
   - ST-Core
@@ -11,4 +11,21 @@ softdepend:
 version: 1.0
 api-version: 1.13
 
+permissions:
+  starly.itemdb.save:
+    description: 아이템 DB에 아이템을 저장하는 권한
+    default: op
+  starly.itemdb.get:
+    description: 아이템 DB에 있는 아이템을 자기 자신이 받을 수 있는 권한
+    default: op
+  starly.itemdb.give:
+    description: 아이템 DB에 있는 아이템을 플레이어에게 지급할 수 있는 권한
+    default: op
+  starly.itemdb.delete:
+    description: 아이템 DB에 있는 아이템을 삭제할 수 있는 권한
+    default: op
+
 commands:
+  itemdb:
+    aliases: [ 아이템저장소 ]
+    description: 아이템 DB 저장소
