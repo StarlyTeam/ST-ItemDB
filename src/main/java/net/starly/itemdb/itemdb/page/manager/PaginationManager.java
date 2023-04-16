@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public interface PageManager {
+public interface PaginationManager {
     void nextPage();
     void prevPage();
     ItemDBPage getCurrentPageData();

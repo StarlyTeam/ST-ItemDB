@@ -3,6 +3,8 @@ package net.starly.itemdb.command;
 import net.starly.itemdb.ItemDB;
 import net.starly.itemdb.itemdb.ItemDBApi;
 import net.starly.itemdb.itemdb.impl.ItemDBApiImpl;
+import net.starly.itemdb.itemdb.page.holder.PaginationHolder;
+import net.starly.itemdb.itemdb.page.manager.impl.PaginationManagerImpl;
 import net.starly.itemdb.util.ItemDBUtil;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.command.Command;

@@ -2,18 +2,18 @@ package net.starly.itemdb.itemdb.page.manager.impl;
 
 import lombok.Getter;
 import net.starly.itemdb.itemdb.page.ItemDBPage;
-import net.starly.itemdb.itemdb.page.manager.PageManager;
+import net.starly.itemdb.itemdb.page.manager.PaginationManager;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PageManagerImpl implements PageManager {
+public class PaginationManagerImpl implements PaginationManager {
 
     @Getter private final List<ItemDBPage> pages;
     @Getter private int currentPage;
 
-    public PageManagerImpl(List<ItemStack> items) {
+    public PaginationManagerImpl(List<ItemStack> items) {
         this.pages = paginateItems(items);
         this.currentPage = 1;
     }
