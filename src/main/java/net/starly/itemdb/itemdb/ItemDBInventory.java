@@ -1,9 +1,8 @@
 package net.starly.itemdb.itemdb;
 
 import lombok.AllArgsConstructor;
-import net.starly.itemdb.itemdb.page.holder.PaginationHolder;
+import net.starly.itemdb.itemdb.page.holder.PaginationInventoryHolder;
 import net.starly.itemdb.itemdb.page.manager.PaginationManager;
-import net.starly.itemdb.itemdb.page.manager.impl.PaginationManagerImpl;
 import net.starly.itemdb.util.ItemDBUtil;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -22,7 +21,7 @@ public class ItemDBInventory {
 
         if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) return;
 
-        PaginationHolder paginationHolder = (PaginationHolder) inventory.getHolder();
+        PaginationInventoryHolder paginationHolder = (PaginationInventoryHolder) inventory.getHolder();
         PaginationManager paginationManager = paginationHolder.getPaginationManager();
 
         if (event.getSlot() == paginationHolder.getPrevBtnSlot()) {

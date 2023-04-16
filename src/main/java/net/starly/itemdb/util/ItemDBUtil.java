@@ -2,8 +2,7 @@ package net.starly.itemdb.util;
 
 import net.starly.itemdb.ItemDB;
 import net.starly.itemdb.itemdb.ItemDBInventory;
-import net.starly.itemdb.itemdb.page.holder.PaginationHolder;
-import net.starly.itemdb.itemdb.page.manager.PaginationManager;
+import net.starly.itemdb.itemdb.page.holder.PaginationInventoryHolder;
 import net.starly.itemdb.itemdb.page.manager.impl.PaginationManagerImpl;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -19,13 +18,13 @@ public class ItemDBUtil {
 
     public static void openItemDBGui(Player player) {
         PaginationManagerImpl paginationManager = new PaginationManagerImpl(ItemDB.getApi().getItems());
-        PaginationHolder paginationHolder = new PaginationHolder(paginationManager, 48, 50);
+        PaginationInventoryHolder paginationHolder = new PaginationInventoryHolder(paginationManager, 48, 50);
 
         player.openInventory(paginationHolder.getInventory());
         registerEvent(player.getUniqueId(), paginationHolder.getInventory());
     }
 
-    public static void pageInventory(Player player, PaginationHolder paginationHolder) {
+    public static void pageInventory(Player player, PaginationInventoryHolder paginationHolder) {
         player.openInventory(paginationHolder.getInventory());
         registerEvent(player.getUniqueId(), paginationHolder.getInventory());
     }

@@ -29,9 +29,7 @@ public class PaginationManagerImpl implements PaginationManager {
     }
 
     @Override
-    public ItemDBPage getCurrentPageData() {
-        return pages.get(currentPage - 1);
-    }
+    public ItemDBPage getCurrentPageData() { return pages.get(currentPage - 1); }
 
     @Override
     public List<ItemDBPage> paginateItems(List<ItemStack> items) {

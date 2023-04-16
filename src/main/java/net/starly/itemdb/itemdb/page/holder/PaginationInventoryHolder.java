@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 @AllArgsConstructor
 @Getter
-public class PaginationHolder implements InventoryHolder {
+public class PaginationInventoryHolder implements InventoryHolder {
 
     private final PaginationManagerImpl paginationManager;
     private final int prevBtnSlot;
