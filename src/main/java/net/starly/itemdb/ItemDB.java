@@ -40,10 +40,6 @@ public class ItemDB extends JavaPlugin {
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         getCommand("itemdb").setExecutor(new ItemDBCmd());
         getCommand("itemdb").setTabCompleter(new ItemDBTab());
-
-        /* EVENT
-         ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        // TODO: 수정
     }
 
 

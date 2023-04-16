@@ -22,7 +22,7 @@ public class PaginationHolder implements InventoryHolder {
     @Override
     public Inventory getInventory() {
 
-        Inventory inventory = ItemDB.getInstance().getServer().createInventory(this, 54, "Page: " + paginationManager.getCurrentPage());
+        Inventory inventory = ItemDB.getInstance().getServer().createInventory(this, 54, "페이지: " + paginationManager.getCurrentPage());
         ItemDBPage currentPage = paginationManager.getCurrentPageData();
 
         for(int i = 0; i < currentPage.getItems().size(); i++)

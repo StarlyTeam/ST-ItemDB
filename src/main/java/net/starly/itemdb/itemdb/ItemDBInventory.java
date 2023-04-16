@@ -35,7 +35,6 @@ public class ItemDBInventory {
             ItemDBUtil.pageInventory(player, paginationHolder);
         }
 
-
         for (int i = 45; i < 54; i ++) if (event.getSlot() == i) return;
 
         player.getInventory().addItem(event.getCurrentItem());
