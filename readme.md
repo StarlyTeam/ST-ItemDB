@@ -1,4 +1,4 @@
-## ItemDB - Interfact Library Api for Bukkit Plugin
+## ItemDB - Interface Library Api for Bukkit Plugin
 
 How to include the API with Maven: 
 ```xml
@@ -41,11 +41,9 @@ the "version" field. Please refer to the release notes for more details.
 Copyright (C) 2023 Starly Store <yangdaeyeong0808@gmail.comm>
 
 ST-ItemDB cannot be redistributed, as it is subject to the terms of the
-GNU Lesser General Public License as published by the Free Software Foundation.
 However, you are allowed to modify it under the terms of the license
 
-You should have received a copy of the GNU Lesser General Public License along with ST-ItemDB.
-If not, see http://www.gnu.org/licenses/.
+![image](https://user-images.githubusercontent.com/108599146/232349779-1b6da6c1-bf3b-4f50-aa6b-2b9360ea2935.png)
 
 ## How to get items from ItemDB
 ```java
