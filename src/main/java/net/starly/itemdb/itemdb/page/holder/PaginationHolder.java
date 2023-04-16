@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.starly.itemdb.ItemDB;
 import net.starly.itemdb.itemdb.page.ItemDBPage;
-import net.starly.itemdb.itemdb.page.manager.PaginationManager;
 import net.starly.itemdb.itemdb.page.manager.impl.PaginationManagerImpl;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
