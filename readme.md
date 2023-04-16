@@ -50,6 +50,9 @@ If not, see http://www.gnu.org/licenses/.
 ## How to get items from ItemDB
 ```java
 import net.starly.itemdb.ItemDB;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 
 public class ExampleClass {
 
