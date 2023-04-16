@@ -1,6 +1,6 @@
 package net.starly.itemdb.command.tabcomplete;
 
-import net.starly.itemdb.ItemDBMain;
+import net.starly.itemdb.ItemDB;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -30,16 +30,16 @@ public class ItemDBTab implements TabCompleter {
 
         else if (args.length == 2) {
             if (args[0].equals("받기"))
-                return StringUtil.copyPartialMatches(args[1], ItemDBMain.getItemDB().getIds().stream().collect(Collectors.toList()), new ArrayList<>());
+                return StringUtil.copyPartialMatches(args[1], ItemDB.getApi().getIds().stream().collect(Collectors.toList()), new ArrayList<>());
             if (args[0].equals("지급"))
-                return StringUtil.copyPartialMatches(args[1], ItemDBMain.getInstance().getServer().getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()), new ArrayList<>());
+                return StringUtil.copyPartialMatches(args[1], ItemDB.getInstance().getServer().getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()), new ArrayList<>());
             if (args[0].equals("삭제"))
-                return StringUtil.copyPartialMatches(args[1], ItemDBMain.getItemDB().getIds().stream().collect(Collectors.toList()), new ArrayList<>());
+                return StringUtil.copyPartialMatches(args[1], ItemDB.getApi().getIds().stream().collect(Collectors.toList()), new ArrayList<>());
         }
 
         else if (args.length == 3) {
             if (args[0].equals("지급"))
-                return StringUtil.copyPartialMatches(args[2], ItemDBMain.getItemDB().getIds().stream().collect(Collectors.toList()), new ArrayList<>());
+                return StringUtil.copyPartialMatches(args[2], ItemDB.getApi().getIds().stream().collect(Collectors.toList()), new ArrayList<>());
         }
         return Collections.emptyList();
     }

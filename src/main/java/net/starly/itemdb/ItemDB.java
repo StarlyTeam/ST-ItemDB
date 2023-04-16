@@ -4,13 +4,14 @@ import lombok.Getter;
 import net.starly.core.bstats.Metrics;
 import net.starly.itemdb.command.ItemDBCmd;
 import net.starly.itemdb.command.tabcomplete.ItemDBTab;
-import net.starly.itemdb.itemdb.impl.ItemDBImpl;
+import net.starly.itemdb.itemdb.ItemDBApi;
+import net.starly.itemdb.itemdb.impl.ItemDBApiImpl;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ItemDBMain extends JavaPlugin {
+public class ItemDB extends JavaPlugin {
 
-    @Getter private static ItemDBMain instance;
-    @Getter private static ItemDBImpl itemDB;
+    @Getter private static ItemDB instance;
+    @Getter private static ItemDBApi api;
 
     @Override
     public void onLoad() { instance = this; }
@@ -29,7 +30,7 @@ public class ItemDBMain extends JavaPlugin {
         /* SETUP
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         new Metrics(this, 12345); // TODO: 수정
-        itemDB = new ItemDBImpl(this);
+        api = new ItemDBApiImpl(this);
 
         /* CONFIG
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */

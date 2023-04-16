@@ -1,10 +1,8 @@
 package net.starly.itemdb.itemdb.impl;
 
-import net.starly.itemdb.itemdb.ItemDB;
-import org.bukkit.Material;
+import net.starly.itemdb.itemdb.ItemDBApi;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,12 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDBImpl implements ItemDB {
+public class ItemDBApiImpl implements ItemDBApi {
 
     private final File file;
     private final FileConfiguration config;
 
-    public ItemDBImpl(JavaPlugin plugin) {
+    public ItemDBApiImpl(JavaPlugin plugin) {
         file = new File(plugin.getDataFolder(), "itemdb.yml");
         this.config = YamlConfiguration.loadConfiguration(file);
         try {
@@ -27,15 +25,10 @@ public class ItemDBImpl implements ItemDB {
     }
 
     @Override
-    public void save(Player player, String id) {
+    public void save(ItemStack item, String id) {
         try {
             if (!file.exists()) file.createNewFile();
-            ItemStack itemStack = new ItemStack(player.getInventory().getItemInMainHand());
-
-            if (itemStack == null || itemStack.getType() == Material.AIR) {
-                player.sendMessage("손에 아이템을 들어주세요.");
-                return;
-            }
+            ItemStack itemStack = new ItemStack(item);
 
             config.set("itemdb." + id, itemStack);
             config.save(file);

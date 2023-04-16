@@ -1,7 +1,8 @@
 package net.starly.itemdb.util;
 
-import net.starly.itemdb.ItemDBMain;
+import net.starly.itemdb.ItemDB;
 import net.starly.itemdb.itemdb.ItemDBInventory;
+import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventPriority;
@@ -15,15 +16,24 @@ public class ItemDBUtil {
 
     public static void openItemDBGui(Player player) {
 
-        Server server = ItemDBMain.getInstance().getServer();
-        Inventory inventory = server.createInventory(null, 6 * 9, "테스트");
+        Server server = ItemDB.getInstance().getServer();
+        Inventory inventory = server.createInventory(null, 6 * 9, "아이템 저장소");
 
-        // TODO 콘피그에 있는 아이템 인벤토리로 불러오기
-        for (int i = 0; i < ItemDBMain.getItemDB().getItems().size(); i++) {
-            for (ItemStack itemStack : ItemDBMain.getItemDB().getItems())
-                inventory.setItem(i, itemStack);
+        for (int i = 45; i < 54; i ++) {
+
+            try {
+                inventory.setItem(i, new ItemStack(Material.STAINED_GLASS));
+            } catch (NoSuchFieldError error) {
+                inventory.setItem(i, new ItemStack(Material.valueOf("GLASS_PANE")));
+            }
+
+            if (i == 48) inventory.setItem(48, new ItemStack(Material.PAPER));
+            if (i == 50) inventory.setItem(50, new ItemStack(Material.PAPER));
         }
-        // TODO 여기까지
+
+        for (int i = 0; i < 45; i++) {
+            inventory.setItem(i, ItemDB.getApi().getItems().get(i));
+        }
 
         ItemDBInventory itemDBInventory = new ItemDBInventory(inventory);
         player.openInventory(inventory);
@@ -33,13 +43,13 @@ public class ItemDBUtil {
         server.getPluginManager().registerEvent(InventoryClickEvent.class, listener, EventPriority.LOWEST, (listeners, event) -> {
             if (player.getUniqueId().equals(((InventoryClickEvent) event).getWhoClicked().getUniqueId()))
                 itemDBInventory.onClick((InventoryClickEvent) event);
-        }, ItemDBMain.getInstance());
+        }, ItemDB.getInstance());
 
         server.getPluginManager().registerEvent(InventoryCloseEvent.class, listener, EventPriority.LOWEST, (listeners, event) -> {
             if (player.getUniqueId().equals(((InventoryCloseEvent) event).getPlayer().getUniqueId())) {
                 InventoryCloseEvent.getHandlerList().unregister(listener);
                 InventoryClickEvent.getHandlerList().unregister(listener);
             }
-        }, ItemDBMain.getInstance());
+        }, ItemDB.getInstance());
     }
 }

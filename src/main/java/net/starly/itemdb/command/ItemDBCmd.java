@@ -1,7 +1,8 @@
 package net.starly.itemdb.command;
 
-import net.starly.itemdb.ItemDBMain;
-import net.starly.itemdb.itemdb.impl.ItemDBImpl;
+import net.starly.itemdb.ItemDB;
+import net.starly.itemdb.itemdb.ItemDBApi;
+import net.starly.itemdb.itemdb.impl.ItemDBApiImpl;
 import net.starly.itemdb.util.ItemDBUtil;
 import org.apache.logging.log4j.util.TriConsumer;
 import org.bukkit.command.Command;
@@ -14,10 +15,10 @@ import java.util.Map;
 
 public class ItemDBCmd implements CommandExecutor {
 
-    private final static Map<String, TriConsumer<ItemDBImpl, Player, String>> subCommandMap = new HashMap<>();
+    private final static Map<String, TriConsumer<ItemDBApi, Player, String>> subCommandMap = new HashMap<>();
 
     static {
-        subCommandMap.put("저장", (item, player, id) -> item.save(player, id));
+        subCommandMap.put("저장", (item, player, id) -> item.save(player.getInventory().getItemInMainHand(), id));
         subCommandMap.put("받기", (item, player, id) -> player.getInventory().addItem(item.getItem(id)));
         subCommandMap.put("삭제", (item, player, id) -> item.delete(id));
     }
@@ -28,7 +29,7 @@ public class ItemDBCmd implements CommandExecutor {
         if (!(sender instanceof Player)) return false;
 
         Player player = (Player) sender;
-        ItemDBImpl itemDB = ItemDBMain.getItemDB();
+        ItemDBApi itemDB = ItemDB.getApi();
 
         if (args.length == 0) {
 
@@ -54,7 +55,7 @@ public class ItemDBCmd implements CommandExecutor {
             }
 
             case "지급": {
-                Player target = ItemDBMain.getInstance().getServer().getPlayer(args[1]);
+                Player target = ItemDB.getInstance().getServer().getPlayer(args[1]);
                 String id = args[2];
 
                 target.getInventory().addItem(itemDB.getItem(id));

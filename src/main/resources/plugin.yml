@@ -1,5 +1,5 @@
 name: ST-ItemDB
-main: net.starly.itemdb.ItemDBMain
+main: net.starly.itemdb.ItemDB
 author: Starly Team
 website: http://starly.kr/
 
