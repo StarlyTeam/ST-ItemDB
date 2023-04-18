@@ -3,7 +3,7 @@ package net.starly.itemdb;
 import lombok.Getter;
 import net.starly.core.bstats.Metrics;
 import net.starly.itemdb.command.ItemDBCmd;
-import net.starly.itemdb.command.tabcomplete.ItemDBTab;
+import net.starly.itemdb.command.ItemDBCommand;
 import net.starly.itemdb.itemdb.ItemDBApi;
 import net.starly.itemdb.itemdb.impl.ItemDBApiImpl;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,8 +38,7 @@ public class ItemDB extends JavaPlugin {
 
         /* COMMAND
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        getCommand("itemdb").setExecutor(new ItemDBCmd());
-        getCommand("itemdb").setTabCompleter(new ItemDBTab());
+        new ItemDBCommand(this, "itemdb");
     }
 
 

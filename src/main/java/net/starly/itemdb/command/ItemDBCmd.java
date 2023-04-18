@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated()
 public class ItemDBCmd implements CommandExecutor {
 
     private final static Map<String, TriConsumer<ItemDBApi, Player, String>> subCommandMap = new HashMap<>();
@@ -46,6 +47,7 @@ public class ItemDBCmd implements CommandExecutor {
             case "저장":
             case "받기":
             case "삭제": {
+
                 String id = args[1];
 
                 subCommandMap.get(args[0]).accept(itemDB, player, id);
@@ -56,6 +58,11 @@ public class ItemDBCmd implements CommandExecutor {
             case "지급": {
                 Player target = ItemDB.getInstance().getServer().getPlayer(args[1]);
                 String id = args[2];
+
+                if (args[1].equals("@a")) {
+                    ItemDB.getInstance().getServer().getOnlinePlayers().forEach(players ->
+                            players.getInventory().addItem(ItemDB.getApi().getItem(id)));
+                }
 
                 target.getInventory().addItem(itemDB.getItem(id));
                 break;
