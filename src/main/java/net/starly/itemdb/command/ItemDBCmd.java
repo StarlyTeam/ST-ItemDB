@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-@Deprecated()
+/** @deprecated */
+@Deprecated
 public class ItemDBCmd implements CommandExecutor {
 
     private final static Map<String, TriConsumer<ItemDBApi, Player, String>> subCommandMap = new HashMap<>();
