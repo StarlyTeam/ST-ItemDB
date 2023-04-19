@@ -27,6 +27,9 @@ permissions:
   starly.itemdb.delete:
     description: 아이템 DB에 있는 아이템을 삭제할 수 있는 권한
     default: op
+  starly.itemdb.reload:
+    description: 콘피그를 리로드할 수 있는 권한
+    default: op
 
 commands:
   itemdb:

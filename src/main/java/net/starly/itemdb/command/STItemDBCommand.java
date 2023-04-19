@@ -1,5 +1,8 @@
 package net.starly.itemdb.command;
 
+import net.starly.itemdb.message.MessageContext;
+import net.starly.itemdb.message.enums.MessageType;
+import net.starly.itemdb.message.impl.ItemDBMessageContextImpl;
 import org.bukkit.command.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.StringUtil;
@@ -11,12 +14,15 @@ public abstract class STItemDBCommand implements CommandExecutor, TabCompleter {
 
     private final String command;
     private final List<STSubCommand> subCommands = new ArrayList<>();
+    private final MessageContext context;
 
-    public STItemDBCommand(JavaPlugin plugin, String command) {
+    public STItemDBCommand(JavaPlugin plugin, String command, boolean itemdb) {
         this.command = command;
-        PluginCommand pluginCommand = Objects.requireNonNull(plugin.getCommand(command));
-        pluginCommand.setExecutor(this);
-        pluginCommand.setTabCompleter(this);
+        PluginCommand cmd = Objects.requireNonNull(plugin.getCommand(command));
+        cmd.setExecutor(this);
+        cmd.setTabCompleter(this);
+        if (itemdb) context = ItemDBMessageContextImpl.getInstance();
+        else context = ItemDBMessageContextImpl.getInstance();
     }
 
     @Override
@@ -28,9 +34,12 @@ public abstract class STItemDBCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         String first;
-        boolean korean = !label.equals(command);
-
-        try { first = args[0]; } catch (ArrayIndexOutOfBoundsException exception) { first = ""; }
+        boolean korean = !label.equals(this.command);
+        try {
+            first = args[0];
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            first = "";
+        }
         if (args.length <= 1) return StringUtil.copyPartialMatches(first, getSubCommands(korean)
                 .stream()
                 .filter((iterator) -> sender.isOp() || sender.hasPermission("starly.itemdb." + iterator))
@@ -42,32 +51,35 @@ public abstract class STItemDBCommand implements CommandExecutor, TabCompleter {
         } else return Collections.emptyList();
     }
 
+    protected abstract boolean isPlayerTabComplete();
+
     private void execute(CommandSender sender, String label, boolean korean, String[] args) {
         if (args.length == 0) printHelpLine(sender, label, korean);
         else {
-            Optional<STSubCommand> optionalSTSubCommand = subCommands.stream().filter((iterator) ->
-                    iterator.getKor().equals(args[0]) || iterator.getEng().equals(args[0])).findFirst();
+            Optional<STSubCommand> optionalSTSubCommand = subCommands.stream().filter((iterator) -> iterator.getKor().equals(args[0]) || iterator.getEng().equals(args[0])).findFirst();
             if (optionalSTSubCommand.isPresent()) {
-                STSubCommand subCommand = optionalSTSubCommand.get();
-                if (subCommand.hasNext() && args.length == 1 && isPlayerTabComplete()) sender.sendMessage("플레이어 이름 입력 안함.");
-                else subCommand.execute(sender, args.length == 1 ? new String[0] : Arrays.copyOfRange(args, 1, args.length), label.equalsIgnoreCase("itemdb") || label.equals("아이템저장소"));
-            } else sender.sendMessage("잘못된 커맨드임.");
+                STSubCommand sub = optionalSTSubCommand.get();
+                if (sub.hasNext() && args.length == 1 && isPlayerTabComplete())
+                    context.get(MessageType.ERROR, "noPlayerName").send(sender);
+                else
+                    sub.execute(sender, args.length == 1 ? new String[0] : Arrays.copyOfRange(args, 1, args.length), label.equalsIgnoreCase("itemdb") || label.equals("아이템저장소"));
+            } else context.get(MessageType.ERROR, "wrongCommand").send(sender);
         }
     }
 
-    private List<String> getSubCommands(boolean korean) {
-        return subCommands.stream().map((iterator) -> {
-            if (korean) return iterator.getKor();
-            else return iterator.getEng();
-        }).collect(Collectors.toList());
+    public void printHelpLine(CommandSender sender, String label, boolean korean) {
+        reformattedHelpline(korean, label, subCommands
+                .stream()
+                .filter((iterator) -> sender.isOp() || sender.hasPermission("starly.itemdb." + iterator.getEng()))
+                .collect(Collectors.toList())
+        ).forEach(sender::sendMessage);
     }
 
-    protected List<String> reformattedHelpLine(boolean korean, String label, List<STSubCommand> subCommandList) {
+    protected List<String> reformattedHelpline(boolean korean, String label, List<STSubCommand> subCommandList) {
         return subCommandList.stream().map((iterator) -> {
             StringBuilder builder = new StringBuilder("§6/");
             builder.append(label);
             builder.append(" ");
-
             if (korean) {
                 builder.append(iterator.getKor());
                 STSubCommand pointer = iterator;
@@ -88,17 +100,14 @@ public abstract class STItemDBCommand implements CommandExecutor, TabCompleter {
         }).collect(Collectors.toList());
     }
 
-    protected void printHelpLine(CommandSender sender, String label, boolean korean) {
-        reformattedHelpLine(korean, label, subCommands
-                .stream()
-                .filter((iterator) -> sender.isOp() || sender.hasPermission("starly.itemdb." + iterator.getEng()))
-                .collect(Collectors.toList())
-        ).forEach(sender::sendMessage);
+    private List<String> getSubCommands(boolean korean) {
+        return subCommands.stream().map((it) -> {
+            if (korean) return it.getKor();
+            else return it.getEng();
+        }).collect(Collectors.toList());
     }
 
     protected void registerSubCommand(STSubCommand... subCommands) {
         this.subCommands.addAll(Arrays.asList(subCommands));
     }
-
-    protected abstract boolean isPlayerTabComplete();
 }

@@ -2,8 +2,7 @@ package net.starly.itemdb;
 
 import lombok.Getter;
 import net.starly.core.bstats.Metrics;
-import net.starly.itemdb.command.ItemDBCmd;
-import net.starly.itemdb.command.ItemDBCommand;
+import net.starly.itemdb.command.execute.ItemDBCommand;
 import net.starly.itemdb.itemdb.ItemDBApi;
 import net.starly.itemdb.itemdb.impl.ItemDBApiImpl;
 import org.bukkit.plugin.java.JavaPlugin;
