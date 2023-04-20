@@ -21,18 +21,18 @@ public class STMessage {
         sender.sendMessage(prefix + message);
     }
 
-     public void send(Player player) {
+    public void send(Player player) {
         if (message.isEmpty()) return;
         player.sendMessage(prefix + message);
-     }
+    }
 
-     public void send(ConsoleCommandSender console) {
+    public void send(ConsoleCommandSender console) {
         if (message.isEmpty()) return;
         console.sendMessage(prefix + message);
-     }
+    }
 
-     public void broadcast() {
+    public void broadcast() {
         if (message.isEmpty()) return;
-         ItemDB.getInstance().getServer().broadcastMessage(message);
-     }
+        ItemDB.getInstance().getServer().broadcastMessage(message);
+    }
 }

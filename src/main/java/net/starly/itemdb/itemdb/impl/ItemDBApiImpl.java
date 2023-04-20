@@ -25,7 +25,7 @@ public class ItemDBApiImpl implements ItemDBApi {
     }
 
     @Override
-    public void save(ItemStack item, String id) {
+    public void saveItem(ItemStack item, String id) {
         try {
             if (!file.exists()) file.createNewFile();
             ItemStack itemStack = new ItemStack(item);
@@ -55,7 +55,7 @@ public class ItemDBApiImpl implements ItemDBApi {
     }
 
     @Override
-    public void delete(String id) {
+    public void deleteItem(String id) {
         try {
             if (!file.exists()) file.createNewFile();
             config.set("itemdb." + id, null);
