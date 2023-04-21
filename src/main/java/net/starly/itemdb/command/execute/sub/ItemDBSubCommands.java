@@ -2,6 +2,7 @@ package net.starly.itemdb.command.execute.sub;
 
 import net.starly.itemdb.ItemDB;
 import net.starly.itemdb.command.STSubCommand;
+import net.starly.itemdb.message.impl.ItemDBMessageContextImpl;
 import net.starly.itemdb.util.ItemDBUtil;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ public class ItemDBSubCommands {
     private static final STSubCommand deleteItemDB = new STSubCommand("<아이디>", "<id>", "");
     private static final STSubCommand giveItemDB = new STSubCommand("<플레이어>", "<playerName>", "");
     private static final STSubCommand getItemDB = new STSubCommand("", "", "");
+    private static final ItemDBMessageContextImpl context = ItemDBMessageContextImpl.getInstance();
 
     public static final STSubCommand OPEN =
             new STSubCommand("열기", "open", "ItemDB 도움말을 확인합니다.", openCommand, (sender, args) -> {
@@ -84,12 +86,13 @@ public class ItemDBSubCommands {
     public static final STSubCommand RELOAD =
             new STSubCommand("리로드", "reload", "콘피그를 리로드합니다.", getItemDB, (sender, args) -> {
                 if (sender instanceof ConsoleCommandSender) {
-                    sender.sendMessage("콘솔 가능");
-                    // TODO 콘피그 리로드
+                    context.reset();
+                    sender.sendMessage("콘피그를 리로드하였습니다.");
                     return;
                 }
                 if (args.length == 0) {
-                    // TODO 콘피그 리로드
+                    context.reset();
+                    sender.sendMessage("콘피그를 리로드하였습니다.");
                 } else {
                     sender.sendMessage("테스트임.");
                 }
