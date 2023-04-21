@@ -5,7 +5,6 @@ import net.starly.itemdb.message.enums.MessageType;
 import java.util.function.Function;
 
 public interface MessageContext {
-
     STMessage get(MessageType messageType, String key, String def);
     STMessage get(MessageType messageType, String key);
     String getOnlyString(MessageType messageType, String key);

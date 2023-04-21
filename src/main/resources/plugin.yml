@@ -13,19 +13,22 @@ api-version: 1.13
 
 permissions:
   starly.itemdb.open:
-    description: 아이템 DB GUI를 열 수 있는 권한
+    description: 아이템 저장소 GUI를 열 수 있는 권한
     default: op
   starly.itemdb.save:
-    description: 아이템 DB에 아이템을 저장하는 권한
+    description: 아이템 저장소에 아이템을 저장하는 권한
     default: op
   starly.itemdb.get:
-    description: 아이템 DB에 있는 아이템을 자기 자신이 받을 수 있는 권한
+    description: 아이템 저장소에 있는 아이템을 자기 자신이 받을 수 있는 권한
     default: op
   starly.itemdb.give:
-    description: 아이템 DB에 있는 아이템을 플레이어에게 지급할 수 있는 권한
+    description: 아이템 저장소에 있는 아이템을 플레이어에게 지급할 수 있는 권한
+    default: op
+  starly.itemdb.giveall:
+    description: 아이템 저장소에 있는 아이템을 모든 플레이어에게 지급할 수 있는 권한
     default: op
   starly.itemdb.delete:
-    description: 아이템 DB에 있는 아이템을 삭제할 수 있는 권한
+    description: 아이템 저장소에 있는 아이템을 삭제할 수 있는 권한
     default: op
   starly.itemdb.reload:
     description: 콘피그를 리로드할 수 있는 권한
@@ -34,4 +37,4 @@ permissions:
 commands:
   itemdb:
     aliases: [ 아이템저장소 ]
-    description: 아이템 DB 저장소
+    description: 아이템 저장소 명령어

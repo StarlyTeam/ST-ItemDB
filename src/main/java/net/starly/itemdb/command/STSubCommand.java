@@ -23,9 +23,8 @@ public class STSubCommand {
     @Nullable private BiConsumer<CommandSender, String[]> biConsumer;
 
     public boolean hasNext() { return nextCommand != null; }
-    public void execute(CommandSender sender, String[] args, boolean itemdb) {
+    public void execute(CommandSender sender, String[] args) {
         if (sender.isOp() || sender.hasPermission("starly.itemdb." + eng)) biConsumer.accept(sender, args);
-        else if(itemdb) ItemDBMessageContextImpl.getInstance().get(MessageType.ERROR, "noPermission").send(sender);
         else ItemDBMessageContextImpl.getInstance().get(MessageType.ERROR, "noPermission").send(sender);
     }
 }

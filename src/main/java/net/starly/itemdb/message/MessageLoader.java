@@ -20,15 +20,15 @@ public class MessageLoader {
         ConfigurationSection messagesSection = Objects.requireNonNull(config.getConfigurationSection("messages"));
         ConfigurationSection errorMessagesSection = Objects.requireNonNull(config.getConfigurationSection("errorMessages"));
 
-        loadMessageSection(messagesSection.getConfigurationSection("itemdb"), MessageType.DEFAULT, false);
-        loadMessageSection(errorMessagesSection.getConfigurationSection("itemdb"), MessageType.ERROR, false);
+        loadMessageSection(messagesSection.getConfigurationSection("itemdb"), MessageType.DEFAULT);
+        loadMessageSection(errorMessagesSection.getConfigurationSection("itemdb"), MessageType.ERROR);
+
+        loaded = true;
     }
 
-    private static void loadMessageSection(ConfigurationSection section, MessageType messageType, boolean itemdb) {
+    private static void loadMessageSection(ConfigurationSection section, MessageType type) {
         if (section == null) return;
-        MessageContext messageContext;
-        if (itemdb) messageContext = ItemDBMessageContextImpl.getInstance();
-        else messageContext = ItemDBMessageContextImpl.getInstance();
-        section.getKeys(false).forEach((key) -> messageContext.set(messageType, key, section.getString(key)));
+        MessageContext context = ItemDBMessageContextImpl.getInstance();
+        section.getKeys(false).forEach((key)-> context.set(type, key, section.getString(key)));
     }
 }

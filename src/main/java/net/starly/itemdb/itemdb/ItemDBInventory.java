@@ -5,10 +5,10 @@ import net.starly.itemdb.itemdb.page.holder.PaginationInventoryHolder;
 import net.starly.itemdb.itemdb.page.manager.PaginationManager;
 import net.starly.itemdb.util.ItemDBUtil;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 @AllArgsConstructor
 public class ItemDBInventory {
@@ -28,15 +28,31 @@ public class ItemDBInventory {
         if (event.getSlot() == paginationHolder.getPrevBtnSlot()) {
             paginationManager.prevPage();
             ItemDBUtil.pageInventory(player, paginationHolder);
+            try {
+                player.playSound(player.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 1, 2);
+            } catch (NoSuchFieldError error) {
+                player.playSound(player.getLocation(), Sound.valueOf("ENTITY_ENDER_DRAGON_FLAP"), 1, 2);
+            } catch (Exception ignored) {}
         }
 
         if (event.getSlot() == paginationHolder.getNextBtnSlot()) {
             paginationManager.nextPage();
             ItemDBUtil.pageInventory(player, paginationHolder);
+            try {
+                player.playSound(player.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 1, 2);
+            } catch (NoSuchFieldError error) {
+                player.playSound(player.getLocation(), Sound.valueOf("ENTITY_ENDER_DRAGON_FLAP"), 1, 2);
+            } catch (Exception ignored) {}
         }
 
         for (int i = 45; i < 54; i ++) if (event.getSlot() == i) return;
 
         player.getInventory().addItem(event.getCurrentItem());
+
+        try {
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BELL, 1, 2);
+        } catch (NoSuchFieldError error) {
+            player.playSound(player.getLocation(), Sound.valueOf("BLOCK_NOTE_BLOCK_BELL"), 1, 2);
+        } catch (Exception ignored) {}
     }
 }

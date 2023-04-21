@@ -5,9 +5,7 @@ import net.starly.core.bstats.Metrics;
 import net.starly.itemdb.command.execute.ItemDBCommand;
 import net.starly.itemdb.itemdb.ItemDBApi;
 import net.starly.itemdb.itemdb.impl.ItemDBApiImpl;
-import net.starly.itemdb.message.MessageContext;
 import net.starly.itemdb.message.MessageLoader;
-import net.starly.itemdb.message.impl.ItemDBMessageContextImpl;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ItemDB extends JavaPlugin {
@@ -43,8 +41,6 @@ public class ItemDB extends JavaPlugin {
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
         new ItemDBCommand(this, "itemdb");
     }
-
-
     private boolean isPluginEnabled(String path) {
         try {
             Class.forName(path);

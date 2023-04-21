@@ -16,13 +16,12 @@ public abstract class STItemDBCommand implements CommandExecutor, TabCompleter {
     private final List<STSubCommand> subCommands = new ArrayList<>();
     private final MessageContext context;
 
-    public STItemDBCommand(JavaPlugin plugin, String command, boolean itemdb) {
+    public STItemDBCommand(JavaPlugin plugin, String command) {
         this.command = command;
         PluginCommand cmd = Objects.requireNonNull(plugin.getCommand(command));
         cmd.setExecutor(this);
         cmd.setTabCompleter(this);
-        if (itemdb) context = ItemDBMessageContextImpl.getInstance();
-        else context = ItemDBMessageContextImpl.getInstance();
+        context = ItemDBMessageContextImpl.getInstance();
     }
 
     @Override
@@ -62,7 +61,7 @@ public abstract class STItemDBCommand implements CommandExecutor, TabCompleter {
                 if (sub.hasNext() && args.length == 1 && isPlayerTabComplete())
                     context.get(MessageType.ERROR, "noPlayerName").send(sender);
                 else
-                    sub.execute(sender, args.length == 1 ? new String[0] : Arrays.copyOfRange(args, 1, args.length), label.equalsIgnoreCase("itemdb") || label.equals("아이템저장소"));
+                    sub.execute(sender, args.length == 1 ? new String[0] : Arrays.copyOfRange(args, 1, args.length));
             } else context.get(MessageType.ERROR, "wrongCommand").send(sender);
         }
     }

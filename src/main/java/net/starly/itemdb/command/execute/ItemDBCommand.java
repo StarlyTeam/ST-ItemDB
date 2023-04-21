@@ -22,12 +22,13 @@ public class ItemDBCommand extends STItemDBCommand {
     }
 
     public ItemDBCommand(JavaPlugin plugin, String command) {
-        super(plugin, command, false);
+        super(plugin, command);
         registerSubCommand(
                 ItemDBSubCommands.OPEN,
                 ItemDBSubCommands.SAVE,
                 ItemDBSubCommands.DELETE,
                 ItemDBSubCommands.GIVE,
+                ItemDBSubCommands.GIVEALL,
                 ItemDBSubCommands.GET,
                 ItemDBSubCommands.RELOAD
         );
@@ -42,7 +43,7 @@ public class ItemDBCommand extends STItemDBCommand {
         if (args.length == 2) {
             if (args[0].equals("지급") || args[0].equals("give"))
                 return StringUtil.copyPartialMatches(args[1], ItemDB.getInstance().getServer().getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()), new ArrayList<>());
-            else if (args[0].equals("받기") || args[0].equals("get") || (args[0].equalsIgnoreCase("삭제") || args[0].equals("delete")))
+            else if (args[0].equals("받기") || args[0].equals("get") || (args[0].equals("삭제") || args[0].equals("delete")) || (args[0].equals("모두지급") || args[0].equals("giveall")))
                 return StringUtil.copyPartialMatches(args[1], ItemDB.getApi().getIds().stream().collect(Collectors.toList()), new ArrayList<>());
             else return Collections.emptyList();
         }

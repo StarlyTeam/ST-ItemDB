@@ -1,6 +1,6 @@
 package net.starly.itemdb.message.impl;
 
-import javafx.util.Pair;
+import net.starly.core.jb.util.Pair;
 import net.starly.itemdb.message.MessageContext;
 import net.starly.itemdb.message.STMessage;
 import net.starly.itemdb.message.enums.MessageType;
@@ -19,35 +19,31 @@ public class ItemDBMessageContextImpl implements MessageContext {
         return instance;
     }
 
-    private ItemDBMessageContextImpl() {}
-
     private final Map<Pair<MessageType, String>, String> map = new HashMap<>();
 
+    private ItemDBMessageContextImpl() {}
+
     @Override
-    public STMessage get(MessageType messageType, String key, String def) {
-        return new STMessage(map.getOrDefault(new Pair<>(MessageType.DEFAULT, "prefix"), ""), map.getOrDefault(new Pair<>(messageType, key), def));
+    public STMessage get(MessageType type, String key, String def) {
+        return new STMessage(map.getOrDefault(new Pair<>(MessageType.DEFAULT, "prefix"), ""), map.getOrDefault(new Pair<>(type, key), def));
     }
 
     @Override
-    public STMessage get(MessageType messageType, String key) { return get(messageType, key, ""); }
+    public STMessage get(MessageType type, String key) { return get(type, key, ""); }
 
     @Override
-    public String getOnlyString(MessageType messageType, String key) { return map.getOrDefault(new Pair<>(MessageType.DEFAULT, key), ""); }
+    public String getOnlyString(MessageType type, String key) { return map.getOrDefault(new Pair<>(MessageType.DEFAULT, key), ""); }
 
     @Override
-    public STMessage get(MessageType messageType, String key, String def, Function<String, String> replacer) {
-        return new STMessage(map.getOrDefault(new Pair<>(MessageType.DEFAULT, "prefix"), ""), replacer.apply(get(messageType, key, def).getMessage()));
+    public STMessage get(MessageType type, String key, String def, Function<String, String> replacer) {
+        return new STMessage(map.getOrDefault(new Pair<>(MessageType.DEFAULT, "prefix"), ""), replacer.apply(get(type, key, def).getMessage()));
     }
 
     @Override
-    public STMessage get(MessageType messageType, String key, Function<String, String> replacer) {
-        return get(messageType, key, "", replacer);
-    }
+    public STMessage get(MessageType type, String key, Function<String, String> replacer) { return get(type, key, "", replacer); }
 
     @Override
-    public void set(MessageType messageType, String key, String value) {
-        map.put(new Pair<>(messageType, key), ChatColor.translateAlternateColorCodes('&', value));
-    }
+    public void set(MessageType type, String key, String value) { map.put(new Pair<>(type, key), ChatColor.translateAlternateColorCodes('&', value)); }
 
     @Override
     public void reset() { map.clear(); }
