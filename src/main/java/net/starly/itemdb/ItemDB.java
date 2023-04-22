@@ -29,7 +29,7 @@ public class ItemDB extends JavaPlugin {
 
         /* SETUP
          ──────────────────────────────────────────────────────────────────────────────────────────────────────────────── */
-        new Metrics(this, 12345); // TODO: 수정
+        new Metrics(this, 18260);
         api = new ItemDBApiImpl(this);
 
         /* CONFIG

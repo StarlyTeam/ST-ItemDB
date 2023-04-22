@@ -31,7 +31,7 @@ public class ItemDBInventory {
             try {
                 player.playSound(player.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 1, 2);
             } catch (NoSuchFieldError error) {
-                player.playSound(player.getLocation(), Sound.valueOf("ENTITY_ENDER_DRAGON_FLAP"), 1, 2);
+                player.playSound(player.getLocation(), Sound.valueOf("ITEM_BOOK_PAGE_TURN"), 2, 1);
             } catch (Exception ignored) {}
         }
 
@@ -41,7 +41,7 @@ public class ItemDBInventory {
             try {
                 player.playSound(player.getLocation(), Sound.ENTITY_ENDERDRAGON_FLAP, 1, 2);
             } catch (NoSuchFieldError error) {
-                player.playSound(player.getLocation(), Sound.valueOf("ENTITY_ENDER_DRAGON_FLAP"), 1, 2);
+                player.playSound(player.getLocation(), Sound.valueOf("ITEM_BOOK_PAGE_TURN"), 2, 1);
             } catch (Exception ignored) {}
         }
 
@@ -52,7 +52,7 @@ public class ItemDBInventory {
         try {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BELL, 1, 2);
         } catch (NoSuchFieldError error) {
-            player.playSound(player.getLocation(), Sound.valueOf("BLOCK_NOTE_BLOCK_BELL"), 1, 2);
+            player.playSound(player.getLocation(), Sound.valueOf("BLOCK_NOTE_BLOCK_BELL"), 2, 2);
         } catch (Exception ignored) {}
     }
 }
