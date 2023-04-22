@@ -74,7 +74,7 @@ public class ItemDBSubCommands {
             });
 
     public static final STSubCommand DELETE =
-            new STSubCommand("삭제", "delete", "아이템저장소에 아이템을 저장합니다.", deleteItemDB, (sender, args) -> {
+            new STSubCommand("삭제", "delete", "아이템저장소에 아이템을 삭제합니다.", deleteItemDB, (sender, args) -> {
 
                 if (args.length == 0) {
                     context.get(MessageType.ERROR, "noItemId").send(sender);
